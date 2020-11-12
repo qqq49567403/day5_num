@@ -17,7 +17,8 @@ from common.myddt import ddt, data
 from common.handle_excel import HandleExcel
 from common.handle_path import testdata_dir
 from common.handle_requests import HandleRequests
-from common.handle_data import Data,set_dataclass_attr_from_resp,relace_case_with_re
+from common.handle_replace import relace_case_with_re_v2
+from common.handle_data import Data,set_dataclass_attr_from_resp
 from common.handle_assert import HandleAssert
 
 case_path = os.path.join(testdata_dir, "api_cases.xlsx")
@@ -41,7 +42,7 @@ class TestRecharge(unittest.TestCase):
     @data(*cases)
     def test_recharge(self, case):
         # 替换
-        case = relace_case_with_re(case)
+        case = relace_case_with_re_v2(case)
 
         # 并发起http请求
         # 判断是否要传递token值。

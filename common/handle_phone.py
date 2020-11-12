@@ -3,6 +3,7 @@
 
 from random import randint
 from common.handle_db import HandleDb
+from common.handle_data import Data
 
 prefix = [133, 153, 173, 177, 180, 181, 189, 199,
           130, 131, 132, 145, 155, 156, 171, 175, 176, 185, 186, 166,
@@ -33,6 +34,7 @@ def get_new_phone():
         count = hd.get_count(select_sql)
         if count == 0:
             hd.close()
+            setattr(Data, "phone", phone)
             return phone
 
-# print(get_new_phone())
+print(get_new_phone())

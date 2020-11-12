@@ -10,8 +10,9 @@ from common.handle_path import testdata_dir
 from common.handle_phone import get_new_phone
 from common.handle_requests import HandleRequests
 
+
 case_path = os.path.join(testdata_dir, 'api_cases.xlsx')
-he = HandleExcel(case_path, '登录')
+he = HandleExcel(case_path, '登陆')
 cases = he.get_all_data()
 # print(cases)
 

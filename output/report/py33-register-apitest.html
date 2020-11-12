@@ -7159,13 +7159,33 @@ body.skin-3 {
 
 
     var resultData = {
-    "testPass": 25,
+    "testPass": 28,
     "testResult": [
+        {
+            "className": "TestAddBid",
+            "methodName": "test_recharge_1",
+            "description": "前置-登陆",
+            "spendTime": "0.0764 s",
+            "status": "成功",
+            "log": [
+                ""
+            ]
+        },
+        {
+            "className": "TestAddBid",
+            "methodName": "test_recharge_2",
+            "description": "加标成功",
+            "spendTime": "0.0771 s",
+            "status": "成功",
+            "log": [
+                ""
+            ]
+        },
         {
             "className": "TestLogin",
             "methodName": "test_login_1",
             "description": "前置条件-注册帐号",
-            "spendTime": "0.213 s",
+            "spendTime": "0.0728 s",
             "status": "成功",
             "log": [
                 ""
@@ -7175,7 +7195,7 @@ body.skin-3 {
             "className": "TestLogin",
             "methodName": "test_login_2",
             "description": "登陆成功",
-            "spendTime": "0.201 s",
+            "spendTime": "0.0778 s",
             "status": "成功",
             "log": [
                 ""
@@ -7185,7 +7205,7 @@ body.skin-3 {
             "className": "TestLogin",
             "methodName": "test_login_3",
             "description": "登陆失败-密码错误",
-            "spendTime": "0.205 s",
+            "spendTime": "0.0758 s",
             "status": "成功",
             "log": [
                 ""
@@ -7195,7 +7215,7 @@ body.skin-3 {
             "className": "TestLogin",
             "methodName": "test_login_4",
             "description": "登陆失败-密码缺失",
-            "spendTime": "0.0687 s",
+            "spendTime": "0.074 s",
             "status": "成功",
             "log": [
                 ""
@@ -7205,7 +7225,7 @@ body.skin-3 {
             "className": "TestLogin",
             "methodName": "test_login_5",
             "description": "登陆失败-用户未注册",
-            "spendTime": "0.513 s",
+            "spendTime": "0.271 s",
             "status": "成功",
             "log": [
                 ""
@@ -7215,7 +7235,7 @@ body.skin-3 {
             "className": "TestLogin",
             "methodName": "test_login_6",
             "description": "登陆失败-用户名缺失",
-            "spendTime": "0.0706 s",
+            "spendTime": "0.0748 s",
             "status": "成功",
             "log": [
                 ""
@@ -7225,10 +7245,10 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_1",
             "description": "前置-登陆",
-            "spendTime": "0.073 s",
+            "spendTime": "0.0772 s",
             "status": "成功",
             "log": [
-                "{'code': 0, 'msg': 'OK', 'data': {'id': 17, 'leave_amount': 1257834.45, 'mobile_phone': '15500000000', 'reg_name': '蜜蜜236', 'reg_time': '2020-09-04 09:55:52.0', 'type': 0, 'token_info': {'token_type': 'Bearer', 'expires_in': '2020-11-10 12:52:38', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJtZW1iZXJfaWQiOjE3LCJleHAiOjE2MDQ5ODM5NTh9.WvdiGWUBFRikpfS-RCuYfsjaC8ZnDDL3lPtXiTtScq0Nc0lk8eUuYsALBeVJgcwvsEjx_cAn7x2mwEf7X7VM7A'}}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}",
+                "{'code': 0, 'msg': 'OK', 'data': {'id': 22, 'leave_amount': 46000.0, 'mobile_phone': '15500000000', 'reg_name': '小柠檬', 'reg_time': '2020-11-11 16:41:44.0', 'type': 1, 'token_info': {'token_type': 'Bearer', 'expires_in': '2020-11-12 10:02:01', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJtZW1iZXJfaWQiOjIyLCJleHAiOjE2MDUxNDY1MjF9.aE2C1ZHySnn5nsV0-gTxB_IXV9i6oDzoCbGSfZGvC_oHaj_Tn4aqv6tc3owgcgXzTMAesyip8-HpQvh42tqjsA'}}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}",
                 ""
             ]
         },
@@ -7236,7 +7256,7 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_2",
             "description": "充值成功",
-            "spendTime": "0.0941 s",
+            "spendTime": "0.0658 s",
             "status": "成功",
             "log": [
                 "{'code': 1003, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved', 'msg': '无法解析的JSON值，请检查token或Authorization请求头'}",
@@ -7247,7 +7267,7 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_3",
             "description": "充值成功",
-            "spendTime": "0.0635 s",
+            "spendTime": "0.0857 s",
             "status": "成功",
             "log": [
                 "{'code': 1003, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved', 'msg': '无法解析的JSON值，请检查token或Authorization请求头'}",
@@ -7258,7 +7278,7 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_1",
             "description": "前置-登陆",
-            "spendTime": "0.0883 s",
+            "spendTime": "0.0724 s",
             "status": "成功",
             "log": [
                 ""
@@ -7268,17 +7288,9 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_2",
             "description": "充值成功",
-            "spendTime": "0.147 s",
+            "spendTime": "0.167 s",
             "status": "成功",
             "log": [
-                "member_id",
-                "{\"member_id\":\"17\",\"amount\":2000}",
-                "money",
-                "{\"code\":0,\"msg\":\"OK\",\"leave_amount\":float(1257834.45)+2000}",
-                "member_id",
-                "{\"check_type\":\"value\",\"check_sql\":\"select leave_amount from member where id=17;\",\"expected\":{\"leave_amount\":float(#money#)+2000}}",
-                "money",
-                "{\"check_type\":\"value\",\"check_sql\":\"select leave_amount from member where id=17;\",\"expected\":{\"leave_amount\":float(1257834.45)+2000}}",
                 ""
             ]
         },
@@ -7286,17 +7298,9 @@ body.skin-3 {
             "className": "TestRecharge",
             "methodName": "test_recharge_3",
             "description": "充值成功",
-            "spendTime": "0.153 s",
+            "spendTime": "0.166 s",
             "status": "成功",
             "log": [
-                "member_id",
-                "{\"member_id\":\"17\",\"amount\":2000.0}",
-                "money",
-                "{\"code\":0,\"msg\":\"OK\",\"leave_amount\":float(1259834.45)+2000}",
-                "member_id",
-                "{\"check_type\":\"value\",\"check_sql\":\"select leave_amount from member where id=17;\",\"expected\":{\"leave_amount\":float(#money#)+2000}}",
-                "money",
-                "{\"check_type\":\"value\",\"check_sql\":\"select leave_amount from member where id=17;\",\"expected\":{\"leave_amount\":float(1259834.45)+2000}}",
                 ""
             ]
         },
@@ -7304,23 +7308,17 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_01",
             "description": "注册成功-带注册名",
-            "spendTime": "0.428 s",
-            "status": "失败",
+            "spendTime": "1.36 s",
+            "status": "成功",
             "log": [
-                "实际code为：2,实际msg为：无效的手机格式\n预期code为：0,预期msg为：OK\n",
-                "Traceback (most recent call last):\n",
-                "  File \"C:\\Users\\85993\\AppData\\Local\\Programs\\Python\\Python37\\lib\\unittest\\case.py\", line 59, in testPartExecutor\n    yield\n",
-                "  File \"C:\\Users\\85993\\AppData\\Local\\Programs\\Python\\Python37\\lib\\unittest\\case.py\", line 628, in run\n    testMethod()\n",
-                "  File \"C:\\Users\\85993\\PycharmProjects\\自动化测试33期\\day5_num\\common\\myddt.py\", line 184, in wrapper\n    return func(self, *args, **kwargs)\n",
-                "  File \"C:\\Users\\85993\\PycharmProjects\\自动化测试33期\\day5_num\\testcases\\test_register_api.py\", line 58, in test_register\n    assert actual[\"code\"] == expected_json[\"code\"]\n",
-                "AssertionError\n"
+                ""
             ]
         },
         {
             "className": "TestApiRegister",
             "methodName": "test_register_02",
             "description": "成功-不带用户名",
-            "spendTime": "1.73 s",
+            "spendTime": "1.45 s",
             "status": "成功",
             "log": [
                 ""
@@ -7330,7 +7328,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_03",
             "description": "不输入手机号",
-            "spendTime": "1.07 s",
+            "spendTime": "1.08 s",
             "status": "成功",
             "log": [
                 ""
@@ -7340,7 +7338,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_04",
             "description": "手机号长度10位",
-            "spendTime": "1.09 s",
+            "spendTime": "1.08 s",
             "status": "成功",
             "log": [
                 ""
@@ -7360,7 +7358,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_06",
             "description": "手机号含有非法字符",
-            "spendTime": "1.07 s",
+            "spendTime": "1.08 s",
             "status": "成功",
             "log": [
                 ""
@@ -7370,7 +7368,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_07",
             "description": "前置-注册15500000000",
-            "spendTime": "1.2 s",
+            "spendTime": "1.08 s",
             "status": "成功",
             "log": [
                 ""
@@ -7380,7 +7378,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_08",
             "description": "已注册过的手机号",
-            "spendTime": "1.07 s",
+            "spendTime": "1.11 s",
             "status": "成功",
             "log": [
                 ""
@@ -7390,7 +7388,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_09",
             "description": "密码7位",
-            "spendTime": "1.08 s",
+            "spendTime": "1.24 s",
             "status": "成功",
             "log": [
                 ""
@@ -7400,7 +7398,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_10",
             "description": "密码17位",
-            "spendTime": "1.09 s",
+            "spendTime": "1.11 s",
             "status": "成功",
             "log": [
                 ""
@@ -7410,7 +7408,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_11",
             "description": "不输入密码",
-            "spendTime": "1.07 s",
+            "spendTime": "1.1 s",
             "status": "成功",
             "log": [
                 ""
@@ -7420,7 +7418,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_12",
             "description": "注册名11位",
-            "spendTime": "1.08 s",
+            "spendTime": "1.12 s",
             "status": "成功",
             "log": [
                 ""
@@ -7430,7 +7428,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_13",
             "description": "类型输入非0，1内容",
-            "spendTime": "1.06 s",
+            "spendTime": "1.09 s",
             "status": "成功",
             "log": [
                 ""
@@ -7440,7 +7438,7 @@ body.skin-3 {
             "className": "TestApiRegister",
             "methodName": "test_register_14",
             "description": "不输入类型",
-            "spendTime": "1.73 s",
+            "spendTime": "1.42 s",
             "status": "成功",
             "log": [
                 ""
@@ -7448,9 +7446,9 @@ body.skin-3 {
         }
     ],
     "testName": "接口自动化测试报告",
-    "testAll": 26,
-    "testFail": 1,
-    "beginTime": "2020-11-10 12:47:36",
+    "testAll": 28,
+    "testFail": 0,
+    "beginTime": "2020-11-12 09:56:59",
     "totalTime": "18s",
     "testSkip": 0,
     "testError": 0

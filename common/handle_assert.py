@@ -54,7 +54,7 @@ class HandleAssert:
             logger.info("查询结果：{}".format(sql_res))
             logger.info("期望结果：{}".format(check_sql_dict["expected"]))
             # 比较
-            if sql_res == check_sql_dict["expected"]:
+            if sql_res == check_sql_dict["expected"]["count"]:
                 self.sql_comp_res["count"] = True
             else:
                 self.sql_comp_res["count"] = False
@@ -66,7 +66,7 @@ class HandleAssert:
 if __name__ == '__main__':
     check_sql_str = '{"check_type":"value",' \
                     '"check_sql":"select leave_amount,mobile_phone from member where id=17",' \
-                    '"expected":{"leave_amount":float(1213834.45)+2000,"mobile_phone":"15500000000"}}'
+                    '"expected":{"leave_amount":float(0.00)+2000,"mobile_phone":"13212072994"}}'
 
     ha = HandleAssert()
     ha.assert_sql(check_sql_str)
