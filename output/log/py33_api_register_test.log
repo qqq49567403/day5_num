@@ -8170,3 +8170,87 @@ AssertionError
 2020-11-12 09:57:17,605 py33 INFO handle_assert.py [第54行] 查询结果：1
 2020-11-12 09:57:17,606 py33 INFO handle_assert.py [第55行] 期望结果：{'count': 1}
 2020-11-12 09:57:17,608 py33 INFO handle_assert.py [第23行] 数据库断言成功！
+2020-11-12 15:05:00,461 py33 INFO handle_replace.py [第24行] 有phone字段，需要先生成一个新的手机号码，并设置到Data类的phone属性
+2020-11-12 15:05:00,704 py33 INFO handle_replace.py [第30行] 替换mark：#phone#，替换后的mark值为：13419955915
+2020-11-12 15:05:00,704 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 1, 'title': '注册普通用户', 'method': 'post', 'url': 'member/register', 'request_data': '{"mobile_phone":"13419955915","pwd":"123456789","type":1,"reg_name":"美丽可爱的小简"}', 'extract': '{"user":"$..mobile_phone"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:00,704 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:00,704 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:00,704 py33 INFO handle_requests.py [第40行] 请求的url为：member/register
+2020-11-12 15:05:00,705 py33 INFO handle_requests.py [第26行] 请求数据为：{'mobile_phone': '13419955915', 'pwd': '123456789', 'type': 1, 'reg_name': '美丽可爱的小简'}
+2020-11-12 15:05:00,814 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:00,814 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55396, 'reg_name': '美丽可爱的小简', 'mobile_phone': '13419955915'}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:00,816 py33 INFO handle_replace.py [第30行] 替换mark：#user#，替换后的mark值为：13419955915
+2020-11-12 15:05:00,816 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 2, 'title': '登陆普通用户', 'method': 'post', 'url': 'member/login', 'request_data': '{"mobile_phone":"13419955915","pwd":"123456789"}', 'extract': '{"member_id":"$..id","token":"$..token"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:00,817 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:00,817 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:00,817 py33 INFO handle_requests.py [第40行] 请求的url为：member/login
+2020-11-12 15:05:00,817 py33 INFO handle_requests.py [第26行] 请求数据为：{'mobile_phone': '13419955915', 'pwd': '123456789'}
+2020-11-12 15:05:00,912 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:00,913 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55396, 'leave_amount': 0.0, 'mobile_phone': '13419955915', 'reg_name': '美丽可爱的小简', 'reg_time': '2020-11-12 15:05:00.0', 'type': 1, 'token_info': {'token_type': 'Bearer', 'expires_in': '2020-11-12 15:10:00', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJtZW1iZXJfaWQiOjU1Mzk2LCJleHAiOjE2MDUxNjUwMDB9._whpKqvrUyUocEhtvGlIEpvq5yk24ZFFSBROqG6MT3LBYhJHZRwMVvA6UuSohRGBPvT6W1Q5__qYSB6cvpS0QQ'}}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:00,914 py33 INFO handle_replace.py [第30行] 替换mark：#member_id#，替换后的mark值为：55396
+2020-11-12 15:05:00,914 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 3, 'title': '充值普通用户', 'method': 'post', 'url': 'member/recharge', 'request_data': '{"member_id":"55396","amount":2000}', 'extract': None, 'expected': None, 'check_sql': None}
+2020-11-12 15:05:00,914 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:00,914 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:00,914 py33 INFO handle_requests.py [第40行] 请求的url为：member/recharge
+2020-11-12 15:05:00,914 py33 INFO handle_requests.py [第26行] 请求数据为：{'member_id': '55396', 'amount': 2000}
+2020-11-12 15:05:00,992 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:00,992 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55396, 'leave_amount': 2000.0, 'mobile_phone': '13419955915', 'reg_name': '美丽可爱的小简', 'reg_time': '2020-11-12 15:05:00.0', 'type': 1}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:00,993 py33 INFO handle_replace.py [第30行] 替换mark：#member_id#，替换后的mark值为：55396
+2020-11-12 15:05:00,993 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 4, 'title': '普通用户加标', 'method': 'post', 'url': 'loan/add', 'request_data': '{"member_id":"55396","title":"py33学习","amount":2000000,"loan_rate":10.0,"loan_term":6,"loan_date_type":1,"bidding_days":10}', 'extract': '{"loan_id":"$..id"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:00,993 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:00,993 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:00,993 py33 INFO handle_requests.py [第40行] 请求的url为：loan/add
+2020-11-12 15:05:00,993 py33 INFO handle_requests.py [第26行] 请求数据为：{'member_id': '55396', 'title': 'py33学习', 'amount': 2000000, 'loan_rate': 10.0, 'loan_term': 6, 'loan_date_type': 1, 'bidding_days': 10}
+2020-11-12 15:05:01,067 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,067 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 678, 'member_id': 55396, 'title': 'py33学习', 'amount': 2000000.0, 'loan_rate': 10.0, 'loan_term': 6, 'loan_date_type': 1, 'bidding_days': 5, 'create_time': '2020-11-12 15:05:01.0', 'bidding_start_time': None, 'full_time': None, 'status': 1}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:01,068 py33 INFO handle_replace.py [第24行] 有phone字段，需要先生成一个新的手机号码，并设置到Data类的phone属性
+2020-11-12 15:05:01,299 py33 INFO handle_replace.py [第30行] 替换mark：#phone#，替换后的mark值为：15252825652
+2020-11-12 15:05:01,299 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 5, 'title': '注册管理员', 'method': 'post', 'url': 'member/register', 'request_data': '{"mobile_phone":"15252825652","pwd":"123456789","type":0,"reg_name":"美丽可爱的管理员"}', 'extract': '{"admin":"$..mobile_phone"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:01,299 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:01,299 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:01,300 py33 INFO handle_requests.py [第40行] 请求的url为：member/register
+2020-11-12 15:05:01,300 py33 INFO handle_requests.py [第26行] 请求数据为：{'mobile_phone': '15252825652', 'pwd': '123456789', 'type': 0, 'reg_name': '美丽可爱的管理员'}
+2020-11-12 15:05:01,413 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,413 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55397, 'reg_name': '美丽可爱的管理员', 'mobile_phone': '15252825652'}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:01,414 py33 INFO handle_replace.py [第30行] 替换mark：#admin#，替换后的mark值为：15252825652
+2020-11-12 15:05:01,414 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 6, 'title': '管理员登陆', 'method': 'post', 'url': 'member/login', 'request_data': '{"mobile_phone":"15252825652","pwd":"123456789"}', 'extract': '{"token":"$..token"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:01,414 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:01,414 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:01,415 py33 INFO handle_requests.py [第40行] 请求的url为：member/login
+2020-11-12 15:05:01,415 py33 INFO handle_requests.py [第26行] 请求数据为：{'mobile_phone': '15252825652', 'pwd': '123456789'}
+2020-11-12 15:05:01,518 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,518 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55397, 'leave_amount': 0.0, 'mobile_phone': '15252825652', 'reg_name': '美丽可爱的管理员', 'reg_time': '2020-11-12 15:05:01.0', 'type': 0, 'token_info': {'token_type': 'Bearer', 'expires_in': '2020-11-12 15:10:01', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJtZW1iZXJfaWQiOjU1Mzk3LCJleHAiOjE2MDUxNjUwMDF9.WvQjGy39lfD29Q_xGzPjcixS_fS0QoO3bY0TfhWJ6bjzt1RJWElb7618buH8L92X5uaeLTzhPL6ySpL5QkHjDw'}}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:01,519 py33 INFO handle_replace.py [第30行] 替换mark：#loan_id#，替换后的mark值为：678
+2020-11-12 15:05:01,519 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 7, 'title': '管理员审核标', 'method': 'patch', 'url': 'loan/audit', 'request_data': '{"loan_id":678,"approved_or_not":true}', 'extract': None, 'expected': None, 'check_sql': None}
+2020-11-12 15:05:01,520 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:01,520 py33 INFO handle_requests.py [第39行] 请求的mehtod为：patch
+2020-11-12 15:05:01,520 py33 INFO handle_requests.py [第40行] 请求的url为：loan/audit
+2020-11-12 15:05:01,520 py33 INFO handle_requests.py [第26行] 请求数据为：{'loan_id': 678, 'approved_or_not': True}
+2020-11-12 15:05:01,589 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,589 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 1005, 'msg': "Request method 'POST' not supported", 'data': None, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:01,590 py33 INFO handle_replace.py [第30行] 替换mark：#user#，替换后的mark值为：13419955915
+2020-11-12 15:05:01,590 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 8, 'title': '登陆普通用户', 'method': 'post', 'url': 'member/login', 'request_data': '{"mobile_phone":"13419955915","pwd":"123456789"}', 'extract': '{"member_id":"$..id","token":"$..token"}', 'expected': None, 'check_sql': None}
+2020-11-12 15:05:01,590 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:01,590 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:01,590 py33 INFO handle_requests.py [第40行] 请求的url为：member/login
+2020-11-12 15:05:01,591 py33 INFO handle_requests.py [第26行] 请求数据为：{'mobile_phone': '13419955915', 'pwd': '123456789'}
+2020-11-12 15:05:01,693 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,693 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 0, 'msg': 'OK', 'data': {'id': 55396, 'leave_amount': 2000.0, 'mobile_phone': '13419955915', 'reg_name': '美丽可爱的小简', 'reg_time': '2020-11-12 15:05:00.0', 'type': 1, 'token_info': {'token_type': 'Bearer', 'expires_in': '2020-11-12 15:10:01', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJtZW1iZXJfaWQiOjU1Mzk2LCJleHAiOjE2MDUxNjUwMDF9.28MKpBhqOI9TSNXNyRXY22AyIGDTvvn_MUEWdx2NaZoOWlpw1X3Rx3fApMghBkoEBGKDs3nSRUxyYCoEtcqHtw'}}, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
+2020-11-12 15:05:01,694 py33 INFO handle_replace.py [第30行] 替换mark：#member_id#，替换后的mark值为：55396
+2020-11-12 15:05:01,695 py33 INFO handle_replace.py [第30行] 替换mark：#loan_id#，替换后的mark值为：678
+2020-11-12 15:05:01,695 py33 INFO handle_replace.py [第31行] 替换完成之后的用例数据为：
+ {'id': 9, 'title': '普通用户投资', 'method': 'post', 'url': 'member/invest', 'request_data': '{"member_id":"55396","loan_id":678,"amount":2000.0}', 'extract': None, 'expected': None, 'check_sql': None}
+2020-11-12 15:05:01,695 py33 INFO handle_requests.py [第38行] =====  发送一次http请求  =====
+2020-11-12 15:05:01,695 py33 INFO handle_requests.py [第39行] 请求的mehtod为：post
+2020-11-12 15:05:01,695 py33 INFO handle_requests.py [第40行] 请求的url为：member/invest
+2020-11-12 15:05:01,695 py33 INFO handle_requests.py [第26行] 请求数据为：{'member_id': '55396', 'loan_id': 678, 'amount': 2000.0}
+2020-11-12 15:05:01,770 py33 INFO handle_requests.py [第52行] 响应的code为：200
+2020-11-12 15:05:01,770 py33 INFO handle_requests.py [第53行] 响应的msg为：{'code': 2, 'msg': '该项目不在竞标中状态', 'data': None, 'copyright': 'Copyright 柠檬班 © 2017-2020 湖南省零檬信息技术有限公司 All Rights Reserved'}
