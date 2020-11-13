@@ -52,7 +52,7 @@ class TestRecharge(unittest.TestCase):
             resp = self.hr.send_request(case["method"], case["url"], case["request_data"])
 
         resp = resp.json()
-
+        print(resp)
         # 如果有提取字段，那么需要从响应结果当中，提取对应的数据。要设置为Data.token
         if case["extract"]:
             set_dataclass_attr_from_resp(resp, case["extract"])
