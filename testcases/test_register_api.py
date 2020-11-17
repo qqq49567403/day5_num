@@ -34,6 +34,7 @@ class TestApiRegister(unittest.TestCase):
     def test_register(self, case):
         logger.info("=====  开始执行第一个测试用例  =====")
         logger.info("从excel中读取的测试数据为：{}".format(case))
+        logger.info("从excel中读取的测试数据为：{}".format(type(case)))
 
         # 替换数据
         case = relace_case_with_re_v2(case)
