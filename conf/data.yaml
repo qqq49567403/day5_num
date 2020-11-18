@@ -1,0 +1,11 @@
+# 管理员用户
+admin_user: 15500000000
+admin_pwd: 12345678
+# 普通用户-投资人用户
+general_user: 15088314689
+general_pwd: 123456789
+# 借款人用户
+borrower_user: 13574660252
+borrower_pwd: 12345678
+
+

@@ -33,17 +33,16 @@ class TestRecharge(unittest.TestCase):
     def setUpClass(cls) -> None:
         # 实例化HandleRequests类，
         cls.hr = HandleRequests()
-        cls.ha = HandleAssert()  # 有去连接数据库
+        cls.hassert = HandleAssert()  # 有去连接数据库
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.ha.close_sql_conn()  # 有关闭数据库连接
+        cls.hassert.close_sql_conn()  # 有关闭数据库连接
 
     @data(*cases)
     def test_recharge(self, case):
         # 替换
         case = relace_case_with_re_v2(case)
-        print(f"=============={type(case)}")
 
         # 并发起http请求
         # 判断是否要传递token值。
@@ -51,16 +50,19 @@ class TestRecharge(unittest.TestCase):
             resp = self.hr.send_request(case["method"], case["url"], case["request_data"], token=getattr(Data, "token"))
         else:
             resp = self.hr.send_request(case["method"], case["url"], case["request_data"])
-
+        # 将json响应结果转成字典
         resp = resp.json()
-        print(resp)
+
         # 如果有提取字段，那么需要从响应结果当中，提取对应的数据。要设置为Data.token
         if case["extract"]:
             set_dataclass_attr_from_resp(resp, case["extract"])
 
+        # 判断是否有期望结果，进行比对
+        if case["expected"]:
+            self.hassert.get_json_compare_res(case["expected"], resp)
+
         # # 如果有数据库校验，则要做数据库校验
         if case["check_sql"]:
-            print(f"-------------{case['check_sql']}")
-            print(f"-------------{type(case['check_sql'])}")
-
-            self.ha.assert_sql(case["check_sql"])
+            self.hassert.init_sql_conn()
+            self.hassert.get_multi_sql_compare_resp(case["check_sql"])
+            self.hassert.close_sql_conn()

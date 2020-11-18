@@ -1,6 +1,7 @@
 # handle_conf.py
 # 读取配置文件
 
+import os
 from configparser import ConfigParser
 from common.handle_path import conf_dir
 
@@ -12,4 +13,4 @@ class HandleConf(ConfigParser):
         self.read(filename, encoding="utf-8")  # 读取配置文件，格式设置为utf-8
 
 
-conf = HandleConf(conf_dir)  # 设置调用日志读取的类对象
+conf = HandleConf(os.path.join(conf_dir,"conf.ini"))  # 设置调用日志读取的类对象

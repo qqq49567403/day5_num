@@ -1,6 +1,6 @@
 # handle_assert.py
 # 封装断言方法
-
+from jsonpath import jsonpath
 from decimal import Decimal
 
 from common.handle_db import HandleDb
@@ -10,21 +10,35 @@ from common.handle_logger import logger
 class HandleAssert:
 
     def __init__(self):
-        self.sql_comp_res = {}  # 存储sql语句查询之后的比较结果
+        self.sql_comp_res = None  # 存储sql语句查询之后的比较结果
+        self.json_compare_res = {}  # 存储响应结果比对的结果
+
+    # 打开数据库连接
+    def init_sql_conn(self):
         self.db = HandleDb()
 
-    def assert_sql(self, check_sql_str):
-        self.__get_sql_compare_res(check_sql_str)
-
-        if False in self.sql_comp_res.values():
-            logger.error("断言失败，存在数据库比对不成功！")
-            raise AssertionError
+    # 多条sql语句比较
+    def get_multi_sql_compare_resp(self, check_sql_str):
+        # 将期望结果的sql表达式转成python对象
+        check_sql_obj = eval(check_sql_str)
+        # 判断是否是列表，多个sql语句对比，一条一条进行比对
+        if isinstance(check_sql_obj, list):
+            # 储存每条sql的对比结果
+            self.sql_comp_res = []
+            for check_sql_dict in check_sql_obj:
+                one_sql_comp_res = self.get_one_compare_res(check_sql_dict)
+                self.sql_comp_res.append(one_sql_comp_res)
+        elif isinstance(check_sql_obj,dict):
+            one_sql_comp_res = self.get_one_compare_res(check_sql_obj)
+            # 字典类型
+            self.sql_comp_res = one_sql_comp_res
         else:
-            logger.info("数据库断言成功！")
+            self.sql_comp_res = None
 
-    def __get_sql_compare_res(self, check_sql_str):
-        check_sql_dict = eval(check_sql_str)
-        logger.info("数据库校验为：\n {}".format(check_sql_dict))
+    # 单条sql语句断言
+    def get_one_compare_res(self,check_sql_dict):
+        one_sql_comp_res = {}
+        logger.info("数据库校验开始！")
 
         if check_sql_dict["check_type"] == "value":
             logger.info("比较sql语句查询之后的值。sql查询结果为字典，将字典当中的每一个都进行比较")
@@ -40,9 +54,11 @@ class HandleAssert:
                         sql_res[key] = float(sql_res[key])  # 将Decimal值转换成float
                         logger.info("将Decimal类型转换成float，转换后的值：{}".format(sql_res[key]))
                     if value == sql_res[key]:
-                        self.sql_comp_res[key] = True  # 比较成功，存储到sql_comp_res中
+                        one_sql_comp_res[key] = True  # 比较成功，存储到sql_comp_res中
+                        logger.info('比对成功！')
                     else:
-                        self.sql_comp_res[key] = False  # 比较失败，存储到sql_comp_res中
+                        one_sql_comp_res[key] = False  # 比较失败，存储到sql_comp_res中
+                        logger.info("比对失败！")
                 else:
                     logger.error("sql查询的结果里面，没有对应的列名：{}，请检查期望结果与语句".format(key))
         # 对比sql语句查询之后的条数
@@ -55,9 +71,38 @@ class HandleAssert:
             logger.info("期望结果：{}".format(check_sql_dict["expected"]))
             # 比较
             if sql_res == check_sql_dict["expected"]["count"]:
-                self.sql_comp_res["count"] = True
+                one_sql_comp_res["count"] = True
             else:
-                self.sql_comp_res["count"] = False
+                one_sql_comp_res["count"] = False
+        return one_sql_comp_res
+
+    # 响应结果断言
+    def get_json_compare_res(self, expeced_exprs_str, resp_dict):
+        # 转成字典
+        expeced_exprs_dict = eval(expeced_exprs_str)
+        # 遍历字典，通过jsonpath，从resp_dcit当中提取对应的数据，更新字典值
+        for key,value in expeced_exprs_dict.items():
+            logger.info("提取表达式为：{}，期望结果值为：{}".format(key, value))
+            # 将jsonpath表达式的key，通过jsonpath提取后，得到对应的值
+            actual_value_list = jsonpath(resp_dict, key)
+
+            # 将提取的表达式与期望的值做等值比较，没有提取到的值为false，提取到的是list
+            if isinstance(actual_value_list,list):
+                if actual_value_list[0] == value:
+                    self.json_compare_res[f"jsonpath-{key}-actual-{value}-expected-{actual_value_list[0]}"] = True
+                else:
+                    self.json_compare_res[f"jsonpath-{key}-actual-{value}-expected-{actual_value_list[0]}"] = False
+                logger.info("提取的值与期望值的比对结果为：{}".format(
+                    self.json_compare_res[
+                        "jsonpath-{}-actual-{}-expected-{}".format(key, value, actual_value_list[0])]))
+            # jsonpath如果提取到对应的值是False
+            else:
+                logger.error("在响应结果当中，根据jsonpath表达式：{} 没有提取到值。提取结果为False".format(key))
+                self.json_compare_res["jsonpath_{}_actual_{}_expected_{}".format(key, value, actual_value_list)] = False
+
+        logger.info("所有实际结果与预期结果的比对情况：")
+        for key,value in self.json_compare_res.items():
+            logger.info("{}:{}".format(key, value))
 
     def close_sql_conn(self):
         self.db.close()
@@ -69,4 +114,4 @@ if __name__ == '__main__':
                     '"expected":{"leave_amount":float(0.00)+2000,"mobile_phone":"13212072994"}}'
 
     ha = HandleAssert()
-    ha.assert_sql(check_sql_str)
+    ha.get_multi_sql_compare_resp(check_sql_str)

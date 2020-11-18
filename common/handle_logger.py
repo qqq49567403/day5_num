@@ -31,4 +31,4 @@ class HandleLogger(logging.Logger):
 
 
 logger = HandleLogger()
-# logger.info("111111111111")
+logger.info("hello world!")

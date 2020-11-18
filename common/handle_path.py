@@ -4,7 +4,7 @@ import os
 # 项目根目录
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 配置文件目录
-conf_dir = os.path.join(root_dir, 'conf','conf.ini')
+conf_dir = os.path.join(root_dir, 'conf')
 # 日志输出目录
 log_dir = os.path.join(root_dir, 'output', 'log')
 # 报告输出目录

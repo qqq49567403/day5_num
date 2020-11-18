@@ -37,4 +37,4 @@ def get_new_phone():
             setattr(Data, "phone", phone)
             return phone
 
-print(get_new_phone())
+

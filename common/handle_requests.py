@@ -47,8 +47,10 @@ class HandleRequests:
         # 发送一次http请求，传入method，url，data，token信息
         if method.upper() == "GET":
             response = requests.get(url, params=self.data, headers=self.headers)
-        else:
+        elif method.upper() == "POST":
             response = requests.post(url, json=self.data, headers=self.headers)
+        else:
+            response = requests.patch(url, json=self.data, headers=self.headers)
         logger.info("响应的code为：{}".format(response.status_code))
         logger.info("响应的msg为：{}".format(response.json()))
         return response

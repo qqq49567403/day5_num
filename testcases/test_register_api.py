@@ -24,11 +24,11 @@ class TestApiRegister(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.hr = HandleRequests()
-        cls.ha = HandleAssert()
+        cls.hassert = HandleAssert()
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.ha.close_sql_conn()
+        cls.hassert.close_sql_conn()
 
     @data(*cases)
     def test_register(self, case):
@@ -50,17 +50,8 @@ class TestApiRegister(unittest.TestCase):
             logger.info("期望结果为： \n {}".format(expected_json))
             logger.info("实际结果为： \n {}".format(actual))
 
-            # 断言
-            try:
-                assert actual["code"] == expected_json["code"]
-                assert actual["msg"] == expected_json["msg"]
-            except AssertionError:
-                logger.exception("断言失败")
-                raise
-            except:
-                logger.exception("除断言以外的其他失败")
-                raise
-
-        sleep(1)
+        sleep(0.2)
         if case["check_sql"]:
-            self.ha.assert_sql(case["check_sql"])
+            self.hassert.init_sql_conn()
+            self.hassert.get_multi_sql_compare_resp(case["check_sql"])
+            self.hassert.close_sql_conn()
