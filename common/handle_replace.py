@@ -1,66 +1,39 @@
-# handle_requests.py
-# 封装发送接口请求
 
-import requests
-import json
+# 封装替换功能
+import re
 
+from common.handle_phone import get_new_phone
+from common.handle_data import Data
 from common.handle_logger import logger
-from common.handle_conf import conf
+from common.handle_yaml import HandleYaml
 
 
-class HandleRequests:
-    def __init__(self):
-        self.headers = {"X-Lemonban-Media-Type": "lemonban.v2"}
+def relace_case_with_re_v2(case_dict):
 
-    # 处理请求头信息-token
-    def __deal_token(self, token=None):
-        if token is not None:
-            self.headers["Authorization"] = "Bearer {}".format(token)
+    # 实例化HandleYaml类，读取data.yaml中的数据
+    global_data = HandleYaml("data.yaml").data
 
-    # 处理请求数据
-    def __deal_data(self, data):
-        if isinstance(data, str):
-            self.data = json.loads(data)
-        else:
-            self.data = data
-        logger.info("请求数据为：{}".format(self.data))
-
-    # 处理url地址
-    def __deal_url(self, url):
-        # 从配置文件读取baseurl
-        base_url = conf.get("server", 'baseurl')
-        # 拼接，拼接除的斜杠在配置文件中处理，excel当中不能/开头
-        url = base_url + url
-        return url
-
-    # 发送一次http请求
-    def send_request(self, method, url, data=None, token=None):
-        logger.info("=====  发送一次http请求  =====")
-        logger.info("请求的mehtod为：{}".format(method))
-        logger.info("请求的url为：{}".format(url))
-        # 请求url地址处理
-        url = self.__deal_url(url)
-        # 处理请提头部信息
-        self.__deal_data(data)
-        # 处理请求数据
-        self.__deal_token(token)
-        # 发送一次http请求，传入method，url，data，token信息
-        if method.upper() == "GET":
-            response = requests.get(url, params=self.data, headers=self.headers)
-        elif method.upper() == "POST":
-            response = requests.post(url, json=self.data, headers=self.headers)
-        else:
-            response = requests.patch(url, json=self.data, headers=self.headers)
-        logger.info("响应的code为：{}".format(response.status_code))
-        logger.info("响应的msg为：{}".format(response.json()))
-        return response
+    case_str = str(case_dict)
+    # 正则提取
+    data_mark_list = re.findall("#(\w+)#", case_str)  # 列表
+    logger.info("从测试用例中，正则提取之后的结果：{}".format(data_mark_list))
+    # 若有phone字段，则先生成一个未注册的手机号码，并设置为Data类的phone属性
+    if "phone" in data_mark_list:
+        logger.info("有phone字段，需要生成一个新的尚未注册的手机号，并设置到Data类的phone属性")
+        get_new_phone()
+    if data_mark_list:  # 列表不为空
+        for mark in data_mark_list:  # 遍历列表里的值
+            # mark可能在数据配置文件data.yaml当中，也有可能在Data当中。
+            if mark in global_data.keys():
+                case_str = case_str.replace(f"#{mark}#", str(global_data[mark]))
+                logger.info(f"从data.yaml中取数据，替换mark: #{mark}#，替换后mark值为：{global_data[mark]}")
+            else:
+                # 从Data类当中，用对应的数据，去替换。
+                case_str = case_str.replace(f"#{mark}#", getattr(Data, mark))
+                logger.info(f"从Data类中取数据，替换mark: #{mark}#，替换后mark值为：{getattr(Data, mark)}")
+    logger.info(f"替换完成之后的用例数据(字符串类型)为：\n {case_str}")
+    return eval(case_str)
 
 
 
-if __name__ == '__main__':
-    ss = HandleRequests()
-    url = "http://api.lemonban.com/futureloan/member/login"
-    data = {"mobile_phone": "18557519118", "pwd": "123456789"}
-    resq = ss.send_request("post", url, data)
-    resq_dict = resq.json()
-    print(resq_dict)
+
