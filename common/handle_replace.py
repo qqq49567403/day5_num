@@ -21,6 +21,7 @@ def relace_case_with_re_v2(case_dict):
     if "phone" in data_mark_list:
         logger.info("有phone字段，需要生成一个新的尚未注册的手机号，并设置到Data类的phone属性")
         get_new_phone()
+
     if data_mark_list:  # 列表不为空
         for mark in data_mark_list:  # 遍历列表里的值
             # mark可能在数据配置文件data.yaml当中，也有可能在Data当中。
@@ -31,6 +32,7 @@ def relace_case_with_re_v2(case_dict):
                 # 从Data类当中，用对应的数据，去替换。
                 case_str = case_str.replace(f"#{mark}#", getattr(Data, mark))
                 logger.info(f"从Data类中取数据，替换mark: #{mark}#，替换后mark值为：{getattr(Data, mark)}")
+
     logger.info(f"替换完成之后的用例数据(字符串类型)为：\n {case_str}")
     return eval(case_str)
 

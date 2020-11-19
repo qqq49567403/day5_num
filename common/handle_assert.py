@@ -17,6 +17,7 @@ class HandleAssert:
     def init_sql_conn(self):
         self.db = HandleDb()
 
+    # 判断断言结果
     def assert_result(self):
         sql_com_res_flag = True
         json_com_res_flag = True
@@ -115,8 +116,9 @@ class HandleAssert:
             logger.info("提取表达式为：{}，期望结果值为：{}".format(key, value))
             # 将jsonpath表达式的key，通过jsonpath提取后，得到对应的值
             actual_value_list = jsonpath(resp_dict, key)
+            print(type(actual_value_list))
 
-            # 将提取的表达式与期望的值做等值比较，没有提取到的值为false，提取到的是list
+            # 将提取的表达式与期望的值做等值比较，没有提取到的值为false，提取到的是True
             if isinstance(actual_value_list,list):
                 if actual_value_list[0] == value:
                     self.json_compare_res[f"jsonpath-{key}-actual-{value}-expected-{actual_value_list[0]}"] = True
@@ -133,6 +135,7 @@ class HandleAssert:
         logger.info("所有实际结果与预期结果的比对情况：")
         for key,value in self.json_compare_res.items():
             logger.info("{}:{}".format(key, value))
+        print("--------------------------------------------")
 
     def close_sql_conn(self):
         self.db.close()
@@ -141,7 +144,9 @@ class HandleAssert:
 if __name__ == '__main__':
     check_sql_str = '{"check_type":"value",' \
                     '"check_sql":"select leave_amount,mobile_phone from member where id=17",' \
-                    '"expected":{"leave_amount":float(0.00)+2000,"mobile_phone":"13212072994"}}'
+                    '"expected":{"leave_amount":float(0.00)+0,"mobile_phone":"13212072994"}}'
 
     ha = HandleAssert()
+    ha.init_sql_conn()
     ha.get_multi_sql_compare_resp(check_sql_str)
+    ha.close_sql_conn()

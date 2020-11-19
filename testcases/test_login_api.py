@@ -22,6 +22,7 @@ class TestLogin(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.hr = HandleRequests()
+        cls.hassert = HandleAssert()
 
     @data(*cases)
     def test_login(self, case):
@@ -35,6 +36,5 @@ class TestLogin(unittest.TestCase):
         resp = resp.json()
 
         # 判断是否有期望结果，进行对比
-        if case["expected"]:
-            self.hassert.get_json_compare_res(case["expected"], resp)
+
 

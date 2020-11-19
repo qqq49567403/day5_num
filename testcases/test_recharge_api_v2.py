@@ -33,7 +33,7 @@ class TestRecharge(unittest.TestCase):
     def setUpClass(cls) -> None:
         # 实例化HandleRequests类，
         cls.hr = HandleRequests()
-        cls.hassert = HandleAssert()  # 有去连接数据库
+        cls.hassert = HandleAssert()
 
     @data(*cases)
     def test_recharge(self, case):

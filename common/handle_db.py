@@ -49,6 +49,6 @@ class HandleDb:
 if __name__ == '__main__':
     ss = HandleDb()
     count = ss.get_count('select * from futureloan.member where mobile_phone=17250364252;')
-    print(count)
+    print(type(count))
     ss.close()
 

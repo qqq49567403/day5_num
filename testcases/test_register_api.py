@@ -38,13 +38,10 @@ class TestApiRegister(unittest.TestCase):
         # 发起一次http请求
         resp = self.hr.send_request(case["method"], case["url"], case["request_data"])
 
+        resp = resp.json()
+
         if case["expected"]:
-            # 响应结果的字典类型
-            actual = resp.json()
-            # 期望结果的字典类型
-            expected_json = eval(case["expected"])
-            logger.info("期望结果为： \n {}".format(expected_json))
-            logger.info("实际结果为： \n {}".format(actual))
+            self.hassert.get_json_compare_res(case["expected"], resp)
 
         sleep(0.2)
         if case["check_sql"]:
