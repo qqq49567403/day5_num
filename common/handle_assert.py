@@ -17,8 +17,37 @@ class HandleAssert:
     def init_sql_conn(self):
         self.db = HandleDb()
 
+    def assert_result(self):
+        sql_com_res_flag = True
+        json_com_res_flag = True
+
+        # json响应结果比对中，如果没有False，则全部比对通过，否则，表示比对失败
+        if self.json_compare_res and False in self.json_compare_res.values():
+            logger.info("sql断言失败，用例失败！请检查sql比对结果为False的！")
+            sql_com_res_flag = False
+
+        # 判断sql_com_res_flag不为空，说明有sql比对
+        if self.sql_comp_res:
+            # self.sql_com_res_flag为列表，说明有多条sql语句进行比对结果，则需要一个个确认是否有False
+            if isinstance(self.sql_comp_res, list):
+                for res in self.sql_comp_res:
+                    if False in res.values():
+                        sql_com_res_flag = False
+            # self.sql_com_res_flag为字典，则说明有一条sql语句比对结果，只需要确认是否为False
+            if isinstance(self.sql_comp_res, dict):
+                if False in self.sql_comp_res.values():
+                    sql_com_res_flag = False
+            if sql_com_res_flag is False or json_com_res_flag is False:
+                logger.info("sql语句断言失败或者json响应数据段断言失败！")
+                logger.error(f"sql语句断言结果为：{sql_com_res_flag}")
+                logger.error(f"json响应结果断言结果为：{json_com_res_flag}")
+            else:
+                logger.info("用例执行通过！")
+
+
     # 多条sql语句比较
     def get_multi_sql_compare_resp(self, check_sql_str):
+
         # 将期望结果的sql表达式转成python对象
         check_sql_obj = eval(check_sql_str)
         # 判断是否是列表，多个sql语句对比，一条一条进行比对
@@ -26,17 +55,17 @@ class HandleAssert:
             # 储存每条sql的对比结果
             self.sql_comp_res = []
             for check_sql_dict in check_sql_obj:
-                one_sql_comp_res = self.get_one_compare_res(check_sql_dict)
+                one_sql_comp_res = self.__get_one_compare_res(check_sql_dict)
                 self.sql_comp_res.append(one_sql_comp_res)
         elif isinstance(check_sql_obj,dict):
-            one_sql_comp_res = self.get_one_compare_res(check_sql_obj)
+            one_sql_comp_res = self.__get_one_compare_res(check_sql_obj)
             # 字典类型
             self.sql_comp_res = one_sql_comp_res
         else:
             self.sql_comp_res = None
 
     # 单条sql语句断言
-    def get_one_compare_res(self,check_sql_dict):
+    def __get_one_compare_res(self,check_sql_dict):
         one_sql_comp_res = {}
         logger.info("数据库校验开始！")
 
@@ -61,6 +90,7 @@ class HandleAssert:
                         logger.info("比对失败！")
                 else:
                     logger.error("sql查询的结果里面，没有对应的列名：{}，请检查期望结果与语句".format(key))
+                    one_sql_comp_res[key] = False
         # 对比sql语句查询之后的条数
         elif check_sql_dict["check_type"] == "count":
             logger.info("比较sql语句查询之后的条数，sql查询结果为整数，只要对比数据即可")

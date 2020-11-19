@@ -29,11 +29,6 @@ class TestBusinessFlow(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.hr = HandleRequests()  # 实例化HandleRequests类
-        cls.ha = HandleAssert()  # 连接数据库
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.ha.close_sql_conn()  # 关闭数据库连接
 
     @data(*cases)
     def test_business_flow(self, case):

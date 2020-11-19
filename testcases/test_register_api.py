@@ -26,10 +26,6 @@ class TestApiRegister(unittest.TestCase):
         cls.hr = HandleRequests()
         cls.hassert = HandleAssert()
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.hassert.close_sql_conn()
-
     @data(*cases)
     def test_register(self, case):
         logger.info("=====  开始执行第一个测试用例  =====")

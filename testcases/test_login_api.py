@@ -36,5 +36,5 @@ class TestLogin(unittest.TestCase):
 
         # 判断是否有期望结果，进行对比
         if case["expected"]:
-            self.hassert.get_json_compare_res(case["expected"],resp)
+            self.hassert.get_json_compare_res(case["expected"], resp)
 

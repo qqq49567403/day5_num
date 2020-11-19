@@ -32,10 +32,6 @@ class TestAddBid(unittest.TestCase):
         cls.hr = HandleRequests()
         cls.hassert = HandleAssert()  # 连接数据库进行查询
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.hassert.close_sql_conn()  # 关闭数据库连接
-
     @data(*cases)
     def test_recharge(self, case):
         # 替换

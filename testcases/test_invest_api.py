@@ -33,10 +33,6 @@ class TestInvest(unittest.TestCase):
         cls.hr = HandleRequests()
         cls.hassert = HandleAssert()
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.hassert.close_sql_conn()
-
     @data(*cases)
     def test_invest(self, case):
         # 替换数据

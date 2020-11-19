@@ -35,10 +35,6 @@ class TestRecharge(unittest.TestCase):
         cls.hr = HandleRequests()
         cls.hassert = HandleAssert()  # 有去连接数据库
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.hassert.close_sql_conn()  # 有关闭数据库连接
-
     @data(*cases)
     def test_recharge(self, case):
         # 替换

@@ -32,10 +32,6 @@ class TestAduit(unittest.TestCase):
         cls.hr = HandleRequests()
         cls.hassert = HandleAssert()  # 打开数据库连接
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.hassert.close_sql_conn()  # 关闭数据库连接
-
     @data(*cases)
     def test_aduit(self, case):
         # 替换
@@ -62,3 +58,6 @@ class TestAduit(unittest.TestCase):
             self.hassert.init_sql_conn()
             self.hassert.get_multi_sql_compare_resp(case["check_sql"])
             self.hassert.close_sql_conn()
+
+        # 最终结果
+        self.hassert.assert_result()
